@@ -34,8 +34,5 @@ public class StudentsModel {
 	private String studenttMobileNumber;
 	@Column(name = "stream")
 	private String stream;
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="batchId")
-	private Batch batch;
-
+	
 }
