@@ -1,6 +1,8 @@
 package com.scholarsync.model;
 
 import java.util.Date;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -27,8 +29,10 @@ public class Batch {
     
     @Column(name = "start_date")
     private Date startDate;
+
+    private List<String> tranerName;
     
-    @Column(name = "end_date")
-    private Date endDate;
+    // @Column(name = "end_date")
+    // private Date endDate;
     
 }
