@@ -3,11 +3,12 @@ package com.scholarsync.service;
 import java.util.List;
 
 import com.scholarsync.model.Batch;
+import com.scholarsync.request.BatchRequest;
 
 public interface BatchService {
-    Batch createBatch(Batch batch);
-    Batch updateBatch(Long batchId, Batch batch);
+    Batch createBatch(BatchRequest batch);
+    Batch updateBatch(String batchId, BatchRequest batch);
     List<Batch> getAllBatches();
-    Batch getBatchById(Long batchId);
-    void deleteBatch(Long batchId);
+    Batch getBatchById(String batchId);
+    void deleteBatch(String batchId);
 }
