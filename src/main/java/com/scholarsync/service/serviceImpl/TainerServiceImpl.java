@@ -21,7 +21,7 @@ public class TainerServiceImpl implements TrainerService  {
     @Override
     public Trainer createTrainer(Trainer trainer) {
         List<Trainer> trainers = trainerRepository.findAll();
-        if(trainers.contains(trainers)){
+        if(!trainers.contains(trainers)){
             throw new RuntimeErrorException(null);
         }
        return trainerRepository.save(trainer);

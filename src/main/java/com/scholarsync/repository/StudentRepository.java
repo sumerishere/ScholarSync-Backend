@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.scholarsync.model.StudentsModel;
 
 @Repository
-public interface StudentRepository  extends JpaRepository<StudentsModel, Long>{
+public interface StudentRepository extends JpaRepository<StudentsModel, Long>{
 	
 }

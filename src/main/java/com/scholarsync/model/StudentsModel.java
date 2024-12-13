@@ -19,19 +19,25 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StudentsModel {
+	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long  studentId;
 	@Column(name = "firstname")
 	private String firstName;
+	
 	@Column(name = "lastname")
 	private String lastName;
+	
 	@Column(name = "student_address")
 	private String studentAddress;
+	
 	@Column(name = "student_email")
 	private String studentEmail;
+	
 	@Column(name = "student_mobileNumber")
 	private String studenttMobileNumber;
+	
 	@Column(name = "stream")
 	private String stream;
 	

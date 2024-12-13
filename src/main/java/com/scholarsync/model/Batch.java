@@ -6,6 +6,8 @@ import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -18,8 +20,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Batch {
+	
     @Id
-    private String batchId;
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "batch_id")
+    private Long batchId;
+    
+    @Column(name = "batch_code")
+    private String batchCode;
     
     @Column(name = "batchName")
     private String batchName;
