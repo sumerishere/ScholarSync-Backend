@@ -37,8 +37,6 @@ public class Batch {
     
     @Column(name = "start_date")
     private Date startDate;
-
-    private List<String> tranerName;
     
     // @Column(name = "end_date")
     // private Date endDate;

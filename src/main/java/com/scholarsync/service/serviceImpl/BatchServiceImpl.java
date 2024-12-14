@@ -1,46 +1,78 @@
 package com.scholarsync.service.serviceImpl;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.scholarsync.exception.ResourceNotFoundException;
 import com.scholarsync.model.Batch;
+import com.scholarsync.model.BatchTrainerModel;
+import com.scholarsync.model.Trainer;
 import com.scholarsync.repository.BatchRepository;
+import com.scholarsync.repository.BatchTrainerModelRepository;
+import com.scholarsync.repository.TrainerRepository;
+import com.scholarsync.request.BatchRequest;
 import com.scholarsync.service.BatchService;
 
 @Service
 public class BatchServiceImpl implements BatchService {
 	
-	@Autowired
-	BatchRepository batchRepository;
+    private final BatchRepository batchRepository;
+    private final TrainerRepository trainerRepository;
+    private final BatchTrainerModelRepository batchTrainerModelRepository;
 
-    @Override
-    public ResponseEntity<Batch> createBatch(Batch batch) {
-       return new ResponseEntity<>(batchRepository.save(batch), HttpStatus.CREATED);
+    public BatchServiceImpl(BatchRepository batchRepository,TrainerRepository trainerRepository,BatchTrainerModelRepository batchTrainerModelRepository) {
+        this.batchRepository = batchRepository;
+        this.trainerRepository=trainerRepository;
+        this.batchTrainerModelRepository=batchTrainerModelRepository;
     }
 
     @Override
-    public Batch updateBatch(Long batchId, Batch batch) {
-       return null;
+    public Batch createBatch(BatchRequest batchRequest) {
+        Batch batch = new Batch(UUID.randomUUID().toString().substring(0, 5), batchRequest.getBatchName(), batchRequest.getCourseName(), batchRequest.getStartDate());
+        Batch batch2 = batchRepository.save(batch);
+        for (Long trainerId: batchRequest.getTrianerId()) {
+            Optional<Trainer> trainer = trainerRepository.findById(trainerId);
+            if(trainer.isEmpty()){
+                throw new ResourceNotFoundException("Trainer not found with id: " + trainerId);
+            }
+            BatchTrainerModel batchTrainerModel = new BatchTrainerModel();
+            batchTrainerModel.setBatche(batch2);
+            batchTrainerModel.setTrainers(trainer.get());
+            batchTrainerModelRepository.save(batchTrainerModel);
+        }
+        return batch2;
+    }
+
+    @Override
+    public Batch updateBatch(String batchId, BatchRequest batchRequest) {
+        Batch batch = batchRepository.findById(batchId).orElseThrow(() -> new ResourceNotFoundException("Batch not found"));
+        batch.setBatchName(batchRequest.getBatchName());
+        batch.setCourseName(batchRequest.getCourseName());
+        batch.setStartDate(batchRequest.getStartDate());
+        return batchRepository.save(batch);
     }
 
     @Override
     public List<Batch> getAllBatches() {
-       return null;
+        return batchRepository.findAll();
     }
 
     @Override
-    public Batch getBatchById(Long batchId) {
-       return null;
+    public Batch getBatchById(String batchId) {
+        return batchRepository.findById(batchId).orElseThrow(() -> new ResourceNotFoundException("Batch not found"));
     }
 
     @Override
-    public void deleteBatch(Long batchId) {
-       
+    public void deleteBatch(String batchId) {
+        Batch batch = batchRepository.findById(batchId).orElseThrow(() -> new ResourceNotFoundException("Batch not found"));
+        batchRepository.delete(batch);
     }
-    
+
     
 }
