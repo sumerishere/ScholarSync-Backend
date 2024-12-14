@@ -4,33 +4,22 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< HEAD
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-=======
->>>>>>> f8780e9e93f983c4602f5ff92a1fc2126223acf8
 import org.springframework.stereotype.Service;
 
 import com.scholarsync.exception.ResourceNotFoundException;
 import com.scholarsync.model.Batch;
 import com.scholarsync.model.StudentBatch;
 import com.scholarsync.model.StudentsModel;
-<<<<<<< HEAD
-import com.scholarsync.repository.StudentRepository;
-=======
+
 import com.scholarsync.repository.BatchRepository;
 import com.scholarsync.repository.StudentBatchRepository;
 import com.scholarsync.repository.StudentsRepository;
 import com.scholarsync.request.StudentRequest;
->>>>>>> f8780e9e93f983c4602f5ff92a1fc2126223acf8
 import com.scholarsync.service.StudentService;
 
 @Service
 public class StudentServiceImpl implements StudentService {
 	
-	@Autowired
-	StudentRepository studentRepository;
-
     @Autowired
     private StudentsRepository studentsRepository;
 

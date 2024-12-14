@@ -22,12 +22,7 @@ import lombok.NoArgsConstructor;
 public class Batch {
 	
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name = "batch_id")
-    private Long batchId;
-    
-    @Column(name = "batch_code")
-    private String batchCode;
+    private String batchId;
     
     @Column(name = "batchName")
     private String batchName;

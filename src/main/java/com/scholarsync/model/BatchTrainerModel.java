@@ -24,12 +24,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BatchTrainerModel {
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    
     @ManyToOne
     @JoinColumn(name = "batchId")
     private Batch batche;
+    
     @ManyToOne
     @JoinColumn(name = "trainerId")
     private Trainer trainers;
