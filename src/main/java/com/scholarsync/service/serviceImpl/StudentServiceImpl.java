@@ -31,12 +31,12 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public StudentsModel addStudent(StudentRequest studentRequest) {
         StudentsModel student = new StudentsModel();
-        student.setFirstName(studentRequest.getFirstName());
-        student.setLastName(studentRequest.getLastName());
-        student.setStudentAddress(studentRequest.getStudentAddress());
+        student.setFirstName(studentRequest.getFirstName().toUpperCase());
+        student.setLastName(studentRequest.getLastName().toUpperCase());
+        student.setStudentAddress(studentRequest.getStudentAddress().toUpperCase());
         student.setStudentEmail(studentRequest.getStudentEmail());
         student.setStudenttMobileNumber(studentRequest.getStudenttMobileNumber());
-        student.setStream(studentRequest.getStream());
+        student.setStream(studentRequest.getStream().toUpperCase());
         StudentsModel studentsModel = studentsRepository.save(student);
         StudentBatch studentBatch = new StudentBatch();
         Optional<Batch> batch = batchRepository.findById(studentRequest.getBatchId());
@@ -53,8 +53,8 @@ public class StudentServiceImpl implements StudentService {
     public StudentsModel updateStudent(Long id, StudentRequest studentRequest) {
         StudentsModel student = studentsRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Student not found with ID: " + id));
-        student.setFirstName(studentRequest.getFirstName());
-        student.setLastName(studentRequest.getLastName());
+        student.setFirstName(studentRequest.getFirstName().toUpperCase());
+        student.setLastName(studentRequest.getLastName().toUpperCase());
         student.setStudentAddress(studentRequest.getStudentAddress());
         student.setStudentEmail(studentRequest.getStudentEmail());
         student.setStudenttMobileNumber(studentRequest.getStudenttMobileNumber());
