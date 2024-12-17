@@ -94,5 +94,10 @@ public class BatchServiceImpl implements BatchService {
         batchRepository.delete(batch);
     }
 
+	@Override
+	public List<Batch> searchBatches(String batchName) {
+		return batchRepository.searchByBatchName(batchName);
+	}
+
     
 }

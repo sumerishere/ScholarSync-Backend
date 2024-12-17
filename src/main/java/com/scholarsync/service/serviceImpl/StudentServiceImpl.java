@@ -31,34 +31,53 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentsModel addStudent(StudentRequest studentRequest) {
-        StudentsModel student = new StudentsModel();
-        student.setFirstName(studentRequest.getFirstName());
-        student.setLastName(studentRequest.getLastName());
-        student.setStudentAddress(studentRequest.getStudentAddress());
-        student.setStudentEmail(studentRequest.getStudentEmail());
-        student.setStudenttMobileNumber(studentRequest.getStudenttMobileNumber());
-        student.setStream(studentRequest.getStream());
-        StudentsModel studentsModel = studentsRepository.save(student);
+        Optional<StudentsModel> existingStudentOptional = 
+        studentsRepository.findByStudentEmailOrStudentMobileNumber(
+            studentRequest.getStudentEmail(), 
+            studentRequest.getStudenttMobileNumber()
+        );
+    
+    if (existingStudentOptional.isPresent()) {
+        throw new ResourceNotFoundException("Student with email or mobile number already exists");
+    }
+
+    
+    StudentsModel student = new StudentsModel();
+    student.setFirstName(studentRequest.getFirstName().toUpperCase());
+    student.setLastName(studentRequest.getLastName().toUpperCase());
+    student.setStudentAddress(studentRequest.getStudentAddress().toUpperCase());
+    student.setStudentEmail(studentRequest.getStudentEmail());
+    student.setStudentMobileNumber(studentRequest.getStudenttMobileNumber());
+    student.setStream(studentRequest.getStream().toUpperCase());
+    
+    
+    StudentsModel savedStudent = studentsRepository.save(student);
+
+  
+    Batch batch = batchRepository.findById(studentRequest.getBatchId())
+        .orElseThrow(() -> new ResourceNotFoundException("Batch not found"));
+
+    boolean associationExists = studentBatchRepository.existsByStudentsModelAndBatch(student, batch);
+   
+    if(!associationExists){
         StudentBatch studentBatch = new StudentBatch();
-        Optional<Batch> batch = batchRepository.findById(studentRequest.getBatchId());
-        if(batch.isEmpty()){
-            throw new ResourceNotFoundException("Batch not found");
-        }
-        studentBatch.setBatch(batch.get());
-        studentBatch.setStudentsModel(studentsModel);
-        studentBatchRepository.save(studentBatch);
-        return studentsModel;
+    studentBatch.setBatch(batch);
+    studentBatch.setStudentsModel(savedStudent);
+    studentBatchRepository.save(studentBatch);
+    }
+
+    return savedStudent;
     }
 
     @Override
     public StudentsModel updateStudent(Long id, StudentRequest studentRequest) {
         StudentsModel student = studentsRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Student not found with ID: " + id));
-        student.setFirstName(studentRequest.getFirstName());
-        student.setLastName(studentRequest.getLastName());
+        student.setFirstName(studentRequest.getFirstName().toUpperCase());
+        student.setLastName(studentRequest.getLastName().toUpperCase());
         student.setStudentAddress(studentRequest.getStudentAddress());
         student.setStudentEmail(studentRequest.getStudentEmail());
-        student.setStudenttMobileNumber(studentRequest.getStudenttMobileNumber());
+        student.setStudentMobileNumber(studentRequest.getStudenttMobileNumber());
         student.setStream(studentRequest.getStream());
         return studentsRepository.save(student);
     }
