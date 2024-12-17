@@ -23,7 +23,7 @@ public class TrainerController {
     @Autowired
     private TrainerService trainerService;
 
-    @PostMapping
+    @PostMapping("/add-trainer")
     public ResponseEntity<Trainer> createTrainer(@RequestBody Trainer trainer) {
         Trainer createdTrainer = trainerService.createTrainer(trainer);
         return ResponseEntity.ok(createdTrainer);
