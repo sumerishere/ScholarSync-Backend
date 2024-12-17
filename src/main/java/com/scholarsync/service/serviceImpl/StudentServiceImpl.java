@@ -35,7 +35,7 @@ public class StudentServiceImpl implements StudentService {
         student.setLastName(studentRequest.getLastName().toUpperCase());
         student.setStudentAddress(studentRequest.getStudentAddress().toUpperCase());
         student.setStudentEmail(studentRequest.getStudentEmail());
-        student.setStudenttMobileNumber(studentRequest.getStudenttMobileNumber());
+        student.setStudentMobileNumber(studentRequest.getStudenttMobileNumber());
         student.setStream(studentRequest.getStream().toUpperCase());
         StudentsModel studentsModel = studentsRepository.save(student);
         StudentBatch studentBatch = new StudentBatch();
@@ -57,7 +57,7 @@ public class StudentServiceImpl implements StudentService {
         student.setLastName(studentRequest.getLastName().toUpperCase());
         student.setStudentAddress(studentRequest.getStudentAddress());
         student.setStudentEmail(studentRequest.getStudentEmail());
-        student.setStudenttMobileNumber(studentRequest.getStudenttMobileNumber());
+        student.setStudentMobileNumber(studentRequest.getStudenttMobileNumber());
         student.setStream(studentRequest.getStream());
         return studentsRepository.save(student);
     }
