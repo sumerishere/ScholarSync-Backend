@@ -34,7 +34,7 @@ public class StudentServiceImpl implements StudentService {
         Optional<StudentsModel> existingStudentOptional = 
         studentsRepository.findByStudentEmailOrStudentMobileNumber(
             studentRequest.getStudentEmail(), 
-            studentRequest.getStudenttMobileNumber()
+            studentRequest.getStudentMobileNumber()
         );
     
     if (existingStudentOptional.isPresent()) {
@@ -47,7 +47,7 @@ public class StudentServiceImpl implements StudentService {
     student.setLastName(studentRequest.getLastName().toUpperCase());
     student.setStudentAddress(studentRequest.getStudentAddress().toUpperCase());
     student.setStudentEmail(studentRequest.getStudentEmail());
-    student.setStudentMobileNumber(studentRequest.getStudenttMobileNumber());
+    student.setStudentMobileNumber(studentRequest.getStudentMobileNumber());
     student.setStream(studentRequest.getStream().toUpperCase());
     
     
@@ -77,7 +77,7 @@ public class StudentServiceImpl implements StudentService {
         student.setLastName(studentRequest.getLastName().toUpperCase());
         student.setStudentAddress(studentRequest.getStudentAddress());
         student.setStudentEmail(studentRequest.getStudentEmail());
-        student.setStudentMobileNumber(studentRequest.getStudenttMobileNumber());
+        student.setStudentMobileNumber(studentRequest.getStudentMobileNumber());
         student.setStream(studentRequest.getStream());
         return studentsRepository.save(student);
     }
@@ -99,5 +99,11 @@ public class StudentServiceImpl implements StudentService {
                 .orElseThrow(() -> new ResourceNotFoundException("Student not found with name: " + name));
         studentsRepository.delete(student);
     }
-    
+
+	@Override
+	public StudentsModel getStudentByEmail(String studentEmail) {
+		return studentsRepository.findByStudentEmail(studentEmail)
+                .orElseThrow(() -> new ResourceNotFoundException("Student not found with studentEmail: " + studentEmail));	
+	}
+	
 }

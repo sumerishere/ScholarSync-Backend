@@ -13,7 +13,7 @@ public class StudentRequest {
 	private String lastName;
 	private String studentAddress;
 	private String studentEmail;
-	private String studenttMobileNumber;
+	private String studentMobileNumber;
 	private String stream;
     private String batchId;
 }
