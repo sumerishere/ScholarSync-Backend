@@ -47,7 +47,7 @@ public class BatchController {
 
     @GetMapping("/{batchId}")
     public ResponseEntity<Batch> getBatchById(@PathVariable String batchId) {
-        Batch batch = batchService.getBatchById(batchId);
+        Batch batch = batchService.getBatchById("#"+batchId);
         return ResponseEntity.ok(batch);
     }
 
