@@ -49,7 +49,7 @@ public class StudentsModel {
 
     @NotBlank(message = "Mobile number is required")
     @Pattern(
-        regexp = "^\\+?1?\\s*\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$", 
+    	regexp = "\\d{10}",
         message = "Invalid mobile number format"
     )
     @Column(name = "student_mobileNumber")

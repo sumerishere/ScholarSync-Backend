@@ -11,4 +11,5 @@ import com.scholarsync.model.StudentsModel;
 public interface StudentsRepository  extends JpaRepository<StudentsModel, Long>{
     Optional<StudentsModel> findByFirstNameOrLastName(String firstName, String lastName);
     Optional<StudentsModel> findByStudentEmailOrStudentMobileNumber(String email, String mobileNumber);
-}
+    Optional<StudentsModel>  findByStudentEmail(String studentEmail);
+} 

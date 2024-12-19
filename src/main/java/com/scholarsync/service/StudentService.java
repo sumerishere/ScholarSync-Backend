@@ -13,5 +13,6 @@ public interface StudentService {
     StudentsModel updateStudent(Long id, StudentRequest studentRequest);
     List<StudentsModel> getAllStudents();
     StudentsModel getStudentByName(String name);
+    StudentsModel getStudentByEmail(String studentEmail);
     void deleteStudent(String name);
 }

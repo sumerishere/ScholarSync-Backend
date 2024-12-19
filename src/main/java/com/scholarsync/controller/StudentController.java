@@ -10,15 +10,16 @@ import com.scholarsync.model.StudentsModel;
 import com.scholarsync.request.StudentRequest;
 import com.scholarsync.service.StudentService;
 
+@CrossOrigin("*")
 @RestController
-@RequestMapping("/student/api")
+@RequestMapping("api/students")
 public class StudentController {
 
     @Autowired
     private StudentService studentService;
 
 
-    @PostMapping
+    @PostMapping("/add-student")
     public ResponseEntity<StudentsModel> addStudent(@RequestBody StudentRequest studentRequest) {
         StudentsModel createdStudent = studentService.addStudent(studentRequest);
         return ResponseEntity.ok(createdStudent);
@@ -31,7 +32,7 @@ public class StudentController {
         return ResponseEntity.ok(updatedStudent);
     }
 
-    @GetMapping
+    @GetMapping("/get-all-students")
     public ResponseEntity<List<StudentsModel>> getStudents() {
         List<StudentsModel> students = studentService.getAllStudents();
         return ResponseEntity.ok(students);
@@ -41,6 +42,12 @@ public class StudentController {
     public ResponseEntity<StudentsModel> getStudent(@PathVariable String name) {
         StudentsModel student = studentService.getStudentByName(name);
         return ResponseEntity.ok(student);
+    }
+    
+    @GetMapping("/get-by-email")
+    public ResponseEntity<StudentsModel> getStudentByEmail(@RequestParam("studentEmail") String studentEmail){
+        StudentsModel student = studentService.getStudentByEmail(studentEmail);    	
+    	return ResponseEntity.ok(student);
     }
 
     @DeleteMapping("/{name}")
