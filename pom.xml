@@ -8,18 +8,22 @@
 		<version>3.4.1-SNAPSHOT</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+	
 	<groupId>com.scholarsync</groupId>
 	<artifactId>ScholarSync</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ScholarSync</name>
 	<description>emphasizes the synchronization of student and trainer data, highlighting collaboration.</description>
 	<url/>
+	
 	<licenses>
 		<license/>
 	</licenses>
+	
 	<developers>
 		<developer/>
 	</developers>
+	
 	<scm>
 		<connection/>
 		<developerConnection/>
