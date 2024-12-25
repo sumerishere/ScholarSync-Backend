@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -80,7 +81,7 @@ public class BatchServiceImpl implements BatchService {
 
     @Override
     public List<Batch> getAllBatches() {
-        return batchRepository.findAll();
+        return batchRepository.findAll(Sort.by(Sort.Direction.DESC,"startDate"));
     }
 
     @Override
