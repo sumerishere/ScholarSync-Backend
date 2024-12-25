@@ -33,7 +33,7 @@ public class StudentController {
 
     
     @PostMapping("/add-student")
-    public ResponseEntity<StudentsModel> addStudent(@RequestBody StudentRequest studentRequest) {
+    public ResponseEntity<?> addStudent(@RequestBody StudentRequest studentRequest) {
     	
         try {
             StudentsModel createdStudent = studentService.addStudent(studentRequest);
@@ -50,7 +50,7 @@ public class StudentController {
         }
         catch (Exception e) {
             log.error("Error creating student: " + e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An internal unexpected error occurred. Please try again later.");
         }
     }
 
