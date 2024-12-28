@@ -51,6 +51,14 @@ public class StudentServiceImpl implements StudentService {
 	    student.setStudentMobileNumber(studentRequest.getStudentMobileNumber());
 	    student.setStream(studentRequest.getStream().toUpperCase());
 	    
+	    student.setCourseType(studentRequest.getCourseType());
+	    student.setFeesPaid(studentRequest.getFeesPaid());
+	    student.setDiscount(studentRequest.getDiscount());
+	    
+	    student.setTotalFees(studentRequest.getTotalFees());
+
+;
+	    
 	    
 	    StudentsModel savedStudent = studentsRepository.save(student);
 	

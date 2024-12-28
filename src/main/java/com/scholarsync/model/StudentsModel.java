@@ -59,5 +59,11 @@ public class StudentsModel {
     @Size(max = 50, message = "Stream must be less than 50 characters")
     @Column(name = "stream")
     private String stream;
+    
+    private String courseType;
+    
+    private long feesPaid;
+    private long discount;
+    private long totalFees;
 
 }
